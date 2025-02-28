@@ -6,7 +6,7 @@ import {
   wrapLanguageModel,
 } from 'ai';
 
-export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
+export const DEFAULT_CHAT_MODEL: string = 'gpt-4o';
 
 export const myProvider = customProvider({
   languageModels: {
@@ -32,6 +32,26 @@ interface ChatModel {
 }
 
 export const chatModels: Array<ChatModel> = [
+  {
+    id: 'anthropic/claude-3-haiku',
+    name: 'Claude 3 Haiku',
+    description: 'Claude\'s fastest and most affordable model'
+  },
+  {
+    id: 'anthropic/claude-3-sonnet',
+    name: 'Claude 3 Sonnet',
+    description: 'Claude\'s most balanced model between price and performance'
+  },
+  {
+    id: 'anthropic/claude-3-opus',
+    name: 'Claude 3 Opus',
+    description: 'Claude\'s most capable model, higher cost'
+  },
+  {
+    id: 'gpt-4o',
+    name: 'GPT-4o',
+    description: 'OpenAI\'s most advanced model, fastest and smartest'
+  },
   {
     id: 'chat-model-small',
     name: 'Small model',

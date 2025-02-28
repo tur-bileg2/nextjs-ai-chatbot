@@ -17,9 +17,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useLanguage } from '@/lib/hooks/use-language';
 
 export function SidebarUserNav({ user }: { user: User }) {
   const { setTheme, theme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
 
   return (
     <SidebarMenu>
@@ -47,6 +49,12 @@ export function SidebarUserNav({ user }: { user: User }) {
               onSelect={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
               {`Toggle ${theme === 'light' ? 'dark' : 'light'} mode`}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onSelect={toggleLanguage}
+            >
+              {language === 'en' ? 'Switch to Mongolian' : 'Англи хэл рүү шилжих'}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>

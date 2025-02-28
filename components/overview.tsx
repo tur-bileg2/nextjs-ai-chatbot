@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/hooks/use-language';
 
 export const Overview = () => {
-  // Animation variants for staggered animations
+  const { t, language } = useLanguage();
+  
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -39,10 +41,10 @@ export const Overview = () => {
             <span className="oyuna-text">OYUNA</span>
           </h2>
           <p className="text-center text-lg text-zinc-700 dark:text-zinc-300 mt-2 mb-1">
-            Advanced AI assistant for Mongolian & English
+            {t('Advanced AI assistant for Mongolian & English')}
           </p>
           <p className="text-zinc-600 dark:text-zinc-400 text-sm text-center max-w-lg">
-            Experience intuitive conversations with cutting-edge language technology
+            {t('Experience intuitive conversations with cutting-edge language technology')}
           </p>
         </motion.div>
 
@@ -55,9 +57,9 @@ export const Overview = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
                 </svg>
               </div>
-              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">Multilingual</h3>
+              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{t('Multilingual')}</h3>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">Seamless communication in Mongolian and English</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{t('Seamless communication in Mongolian and English')}</p>
           </motion.div>
 
           <motion.div variants={item} className="rounded-xl bg-white/70 dark:bg-zinc-800/50 p-4 border border-zinc-200 dark:border-zinc-700/40 hover:border-indigo-500/30 transition-colors">
@@ -67,9 +69,9 @@ export const Overview = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                 </svg>
               </div>
-              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">Voice Enabled</h3>
+              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{t('Voice Enabled')}</h3>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">Advanced speech recognition and natural voice synthesis</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{t('Advanced speech recognition and natural voice synthesis')}</p>
           </motion.div>
 
           <motion.div variants={item} className="rounded-xl bg-white/70 dark:bg-zinc-800/50 p-4 border border-zinc-200 dark:border-zinc-700/40 hover:border-purple-500/30 transition-colors">
@@ -79,9 +81,9 @@ export const Overview = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">Free Access</h3>
+              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{t('Free Access')}</h3>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">All premium features without limits or hidden costs</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{t('All premium features without limits or hidden costs')}</p>
           </motion.div>
 
           <motion.div variants={item} className="rounded-xl bg-white/70 dark:bg-zinc-800/50 p-4 border border-zinc-200 dark:border-zinc-700/40 hover:border-teal-500/30 transition-colors">
@@ -91,13 +93,13 @@ export const Overview = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">Private & Secure</h3>
+              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{t('Private & Secure')}</h3>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400">Your conversations remain protected and confidential</p>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{t('Your conversations remain protected and confidential')}</p>
           </motion.div>
         </motion.div>
 
-        {/* Replace "Try asking Oyuna" with a Feature Spotlight section */}
+        {/* Feature Spotlight */}
         <motion.div variants={item} className="rounded-xl bg-gradient-to-r from-blue-50/80 via-indigo-50/80 to-purple-50/80 dark:from-blue-900/30 dark:via-indigo-900/30 dark:to-purple-900/30 p-3 border border-blue-200/50 dark:border-indigo-700/20 mb-4 overflow-hidden relative">
           {/* Animated accent elements */}
           <div className="absolute -top-12 -right-12 w-24 h-24 bg-blue-300/10 dark:bg-blue-500/10 rounded-full blur-xl"></div>
@@ -107,7 +109,7 @@ export const Overview = () => {
             <svg className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
-            Feature Spotlight
+            {t('Feature Spotlight')}
           </h4>
           
           <div className="flex flex-row gap-1 items-center">
@@ -118,8 +120,8 @@ export const Overview = () => {
             </div>
             
             <div className="ml-3">
-              <h5 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">Real-time Translation</h5>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">Oyuna can translate between Mongolian and English instantly while preserving context and cultural nuances</p>
+              <h5 className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{t('Real-time Translation')}</h5>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">{t('Oyuna can translate between Mongolian and English instantly while preserving context and cultural nuances')}</p>
               <div className="mt-2 flex items-center gap-1.5">
                 <span className="px-2 py-0.5 bg-blue-100/70 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/20 rounded-md text-xs text-blue-700 dark:text-blue-300 font-mono">EN</span>
                 <svg className="h-3 w-3 text-zinc-400 dark:text-zinc-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,7 +135,7 @@ export const Overview = () => {
 
         {/* Footer/Call to action */}
         <motion.div variants={item} className="text-center text-zinc-600 dark:text-zinc-400 text-xs flex flex-col items-center">
-          <p>Start your conversation with Oyuna below</p>
+          <p>{t('Start your conversation with Oyuna below')}</p>
           <span className="inline-block animate-bounce rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 dark:from-blue-500 dark:to-indigo-500 p-1 opacity-70 mt-2">
             <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

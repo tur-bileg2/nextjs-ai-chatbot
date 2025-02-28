@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ChatRequestOptions, CreateMessage, Message } from 'ai';
 import { memo } from 'react';
+import { useLanguage } from '@/lib/hooks/use-language';
 
 interface SuggestedActionsProps {
   chatId: string;
@@ -14,26 +15,39 @@ interface SuggestedActionsProps {
 }
 
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
+  const { t, language } = useLanguage();
+  
+  // Define actions with both English and Mongolian options
   const suggestedActions = [
     {
-      title: 'What are the advantages',
-      label: 'of using Next.js?',
-      action: 'What are the advantages of using Next.js?',
+      title: language === 'en' ? 'What are the advantages' : 'Давуу талууд нь юу вэ',
+      label: language === 'en' ? 'of using Next.js?' : 'Next.js ашиглахын?',
+      action: language === 'en' 
+        ? 'What are the advantages of using Next.js?' 
+        : 'Next.js ашиглахын давуу талууд юу вэ?',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: language === 'en' ? 'Write code to' : 'Код бичиж',
+      label: language === 'en' 
+        ? `demonstrate dijkstra's algorithm` 
+        : `dijkstra-н алгоритмыг харуулна уу`,
+      action: language === 'en' 
+        ? `Write code to demonstrate dijkstra's algorithm` 
+        : `Dijkstra-н алгоритмыг харуулсан код бичиж өгнө үү`,
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: language === 'en' ? 'Help me write an essay' : 'Эссе бичихэд тусална уу',
+      label: language === 'en' ? `about silicon valley` : `силикон хөндийн тухай`,
+      action: language === 'en' 
+        ? `Help me write an essay about silicon valley` 
+        : `Силикон хөндийн тухай эссе бичихэд тусална уу`,
     },
     {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
+      title: language === 'en' ? 'What is the weather' : 'Цаг агаар ямар байна',
+      label: language === 'en' ? 'in San Francisco?' : 'Сан Франциско хотод?',
+      action: language === 'en' 
+        ? 'What is the weather in San Francisco?' 
+        : 'Сан Франциско хотын цаг агаар ямар байна?',
     },
   ];
 

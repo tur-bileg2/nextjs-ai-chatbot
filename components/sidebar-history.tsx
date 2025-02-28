@@ -49,6 +49,7 @@ import {
 import type { Chat } from '@/lib/db/schema';
 import { fetcher } from '@/lib/utils';
 import { useChatVisibility } from '@/hooks/use-chat-visibility';
+import { useLanguage } from '@/lib/hooks/use-language';
 
 type GroupedChats = {
   today: Chat[];
@@ -73,6 +74,7 @@ const PureChatItem = ({
     chatId: chat.id,
     initialVisibility: chat.visibility,
   });
+  const { language, t } = useLanguage();
 
   return (
     <SidebarMenuItem>
@@ -97,7 +99,7 @@ const PureChatItem = ({
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="cursor-pointer">
               <ShareIcon />
-              <span>Share</span>
+              <span>{t('Share')}</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
@@ -109,7 +111,7 @@ const PureChatItem = ({
                 >
                   <div className="flex flex-row gap-2 items-center">
                     <LockIcon size={12} />
-                    <span>Private</span>
+                    <span>{t('Private')}</span>
                   </div>
                   {visibilityType === 'private' ? (
                     <CheckCircleFillIcon />
@@ -123,7 +125,7 @@ const PureChatItem = ({
                 >
                   <div className="flex flex-row gap-2 items-center">
                     <GlobeIcon />
-                    <span>Public</span>
+                    <span>{t('Public')}</span>
                   </div>
                   {visibilityType === 'public' ? <CheckCircleFillIcon /> : null}
                 </DropdownMenuItem>
@@ -136,7 +138,7 @@ const PureChatItem = ({
             onSelect={() => onDelete(chat.id)}
           >
             <TrashIcon />
-            <span>Delete</span>
+            <span>{t('Delete')}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -153,6 +155,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
   const { setOpenMobile } = useSidebar();
   const { id } = useParams();
   const pathname = usePathname();
+  const { language, t } = useLanguage();
   const {
     data: history,
     isLoading,
@@ -198,7 +201,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       <SidebarGroup>
         <SidebarGroupContent>
           <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
-            Login to save and revisit previous chats!
+            {t('Login to save and revisit previous chats!')}
           </div>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -209,7 +212,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     return (
       <SidebarGroup>
         <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
-          Today
+          {t('Today')}
         </div>
         <SidebarGroupContent>
           <div className="flex flex-col">
@@ -239,7 +242,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       <SidebarGroup>
         <SidebarGroupContent>
           <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
-            Your conversations will appear here once you start chatting!
+            {t('Your conversations will appear here once you start chatting!')}
           </div>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -293,7 +296,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.today.length > 0 && (
                       <>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
-                          Today
+                          {t('Today')}
                         </div>
                         {groupedChats.today.map((chat) => (
                           <ChatItem
@@ -313,7 +316,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.yesterday.length > 0 && (
                       <>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50 mt-6">
-                          Yesterday
+                          {t('Yesterday')}
                         </div>
                         {groupedChats.yesterday.map((chat) => (
                           <ChatItem
@@ -333,7 +336,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.lastWeek.length > 0 && (
                       <>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50 mt-6">
-                          Last 7 days
+                          {t('Last 7 days')}
                         </div>
                         {groupedChats.lastWeek.map((chat) => (
                           <ChatItem
@@ -353,7 +356,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.lastMonth.length > 0 && (
                       <>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50 mt-6">
-                          Last 30 days
+                          {t('Last 30 days')}
                         </div>
                         {groupedChats.lastMonth.map((chat) => (
                           <ChatItem
@@ -373,7 +376,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.older.length > 0 && (
                       <>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50 mt-6">
-                          Older
+                          {t('Older')}
                         </div>
                         {groupedChats.older.map((chat) => (
                           <ChatItem
@@ -398,16 +401,19 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t('Are you absolutely sure?')}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              chat and remove it from our servers.
+              {t('This action cannot be undone. This will permanently delete your chat and remove it from our servers.')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>
+              {t('Cancel')}
+            </AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete}>
-              Continue
+              {t('Continue')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

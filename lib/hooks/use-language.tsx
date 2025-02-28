@@ -124,4 +124,9 @@ const translations: Record<string, string> = {
   // Model selector "Coming Soon" text
   'Coming Soon': 'Удахгүй нэмэгдэх',
   'Coming soon': 'Удахгүй',
+
+  // User nav translations
+  'Switch to Mongolian': 'Монгол хэл рүү шилжих',
+  'Англи хэл рүү шилжих': 'Англи хэл рүү шилжих', // This is already in Mongolian
+  'User Avatar': 'Хэрэглэгчийн зураг',
 };

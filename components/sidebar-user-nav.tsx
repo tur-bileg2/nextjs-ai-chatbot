@@ -4,6 +4,7 @@ import Image from 'next/image';
 import type { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import {
   DropdownMenu,
@@ -21,7 +22,27 @@ import { useLanguage } from '@/lib/hooks/use-language';
 
 export function SidebarUserNav({ user }: { user: User }) {
   const { setTheme, theme } = useTheme();
-  const { language, toggleLanguage } = useLanguage();
+  const { language, toggleLanguage, t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration errors
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Simplified SSR-safe version
+    return (
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton suppressHydrationWarning>
+            <span className="truncate">{user?.email}</span>
+            <ChevronUp className="ml-auto" />
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    );
+  }
 
   return (
     <SidebarMenu>
@@ -48,7 +69,7 @@ export function SidebarUserNav({ user }: { user: User }) {
               className="cursor-pointer"
               onSelect={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
-              {`Toggle ${theme === 'light' ? 'dark' : 'light'} mode`}
+              {t(theme === 'light' ? 'Toggle dark mode' : 'Toggle light mode')}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer"
@@ -67,7 +88,7 @@ export function SidebarUserNav({ user }: { user: User }) {
                   });
                 }}
               >
-                Sign out
+                {t('Sign out')}
               </button>
             </DropdownMenuItem>
           </DropdownMenuContent>

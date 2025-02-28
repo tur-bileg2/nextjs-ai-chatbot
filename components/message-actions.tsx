@@ -63,8 +63,13 @@ export function PureMessageActions({
     
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Set language to Mongolian
-    utterance.lang = 'mn-MN';
+    // Try to use a Mongolian voice if available
+    const voices = window.speechSynthesis.getVoices();
+    const mongolianVoice = voices.find(voice => voice.lang === 'mn-MN');
+    if (mongolianVoice) {
+      utterance.voice = mongolianVoice;
+      utterance.lang = 'mn-MN';
+    }
     
     // Event handlers
     utterance.onstart = () => setIsSpeaking(true);
@@ -101,9 +106,7 @@ export function PureMessageActions({
           <TooltipContent>Copy</TooltipContent>
         </Tooltip>
 
-        {/* Add TTS Button */}
-        {/* Add TTS Button */}
-        {/* 
+        {/* TTS Button - Uncommented and Enhanced */}
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -116,7 +119,6 @@ export function PureMessageActions({
           </TooltipTrigger>
           <TooltipContent>{isSpeaking ? "Stop Speaking" : "Listen"}</TooltipContent>
         </Tooltip>
-        */}
 
         <Tooltip>
           <TooltipTrigger asChild>

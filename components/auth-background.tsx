@@ -48,8 +48,8 @@ export function AuthBackground() {
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-indigo-950/30" />
       
       {/* Add subtle glow effects */}
-      <div className="absolute top-1/3 -left-1/4 w-1/2 h-1/2 bg-indigo-500/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-1/3 -right-1/4 w-1/2 h-1/2 bg-purple-500/10 blur-[120px] rounded-full" />
+      <div className="absolute top-1/3 -left-1/4 size-1/2 bg-indigo-500/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-1/3 -right-1/4 size-1/2 bg-purple-500/10 blur-[120px] rounded-full" />
       
       {/* Stars with enhanced styling */}
       <div className="absolute inset-0">
@@ -62,9 +62,13 @@ export function AuthBackground() {
         ))}
       </div>
       
-      {/* Add subtle grid lines for depth */}
+      {/* Add subtle grid lines for depth - Fixed conflicting classnames */}
       <div 
-        className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:40px_40px]" 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'linear-gradient(to right, #8882 1px, transparent 1px), linear-gradient(to bottom, #8882 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }}
       />
     </div>
   );

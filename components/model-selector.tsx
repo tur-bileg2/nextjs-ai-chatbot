@@ -34,16 +34,16 @@ export function ModelSelector({
     setIsMounted(true);
   }, []);
 
-  // Define models that are "coming soon"
-  const comingSoonModelIds = [
-    'anthropic/claude-3-haiku',
-    'anthropic/claude-3-sonnet',
-    'anthropic/claude-3-opus',
-    'gpt-4o',
-  ];
-
   // Available models and coming soon models
   const { availableModels, comingSoonModels } = useMemo(() => {
+    // Define comingSoonModelIds inside useMemo
+    const comingSoonModelIds = [
+      'anthropic/claude-3-haiku',
+      'anthropic/claude-3-sonnet',
+      'anthropic/claude-3-opus',
+      'gpt-4o',
+    ];
+    
     const available = [];
     const comingSoon = [];
     
@@ -59,7 +59,7 @@ export function ModelSelector({
       availableModels: available, 
       comingSoonModels: comingSoon 
     };
-  }, [comingSoonModelIds]);
+  }, []);
 
   // Translate model descriptions and names
   const translatedAvailableModels = useMemo(() => {

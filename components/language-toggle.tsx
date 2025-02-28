@@ -27,7 +27,7 @@ export function LanguageToggle({
           onClick={toggleLanguage}
           className={showText ? 'gap-2' : ''}
         >
-          <Globe className="h-4 w-4" />
+          <Globe className="size-4" />
           {showText && (
             <span>
               {language === 'en' ? 'MN' : 'EN'}

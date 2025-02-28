@@ -141,7 +141,7 @@ const SpeechRecognitionButton = ({ onTranscript, isDisabled = false }: SpeechRec
         console.error('Error cleaning up speech recognition', e);
       }
     };
-  }, [language, onTranscript, errorState]);
+  }, [language, onTranscript, errorState, isListening]);
 
   // Update the ref when state changes
   useEffect(() => {

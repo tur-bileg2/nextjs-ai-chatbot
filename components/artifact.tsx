@@ -55,25 +55,10 @@ export interface UIArtifact {
   };
 }
 
-function PureArtifact({
-  chatId,
-  input,
-  setInput,
-  handleSubmit,
-  isLoading,
-  stop,
-  attachments,
-  setAttachments,
-  append,
-  messages,
-  setMessages,
-  reload,
-  votes,
-  isReadonly,
-}: {
+interface PropsWithSetInput {
   chatId: string;
   input: string;
-  setInput: (input: string) => void;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
   isLoading: boolean;
   stop: () => void;
   attachments: Array<Attachment>;
@@ -95,7 +80,24 @@ function PureArtifact({
     chatRequestOptions?: ChatRequestOptions,
   ) => Promise<string | null | undefined>;
   isReadonly: boolean;
-}) {
+}
+
+function PureArtifact({
+  chatId,
+  input,
+  setInput,
+  handleSubmit,
+  isLoading,
+  stop,
+  attachments,
+  setAttachments,
+  append,
+  messages,
+  setMessages,
+  reload,
+  votes,
+  isReadonly,
+}: PropsWithSetInput) {
   const { artifact, setArtifact, metadata, setMetadata } = useArtifact();
 
   const {

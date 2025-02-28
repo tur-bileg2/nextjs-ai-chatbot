@@ -29,6 +29,7 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { SuggestedActions } from './suggested-actions';
 import equal from 'fast-deep-equal';
+import SpeechRecognitionButton from './speech-recognition-button';
 
 function PureMultimodalInput({
   chatId,
@@ -46,7 +47,7 @@ function PureMultimodalInput({
 }: {
   chatId: string;
   input: string;
-  setInput: (value: string) => void;
+  setInput: (value: string | ((prev: string) => string)) => void;
   isLoading: boolean;
   stop: () => void;
   attachments: Array<Attachment>;
@@ -112,6 +113,14 @@ function PureMultimodalInput({
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(event.target.value);
     adjustHeight();
+  };
+
+  const handleSpeechTranscript = (text: string) => {
+    setInput((prev) => {
+      const newInput = prev ? `${prev} ${text}` : text;
+      return newInput;
+    });
+    setTimeout(adjustHeight, 10); // Adjust height after state update
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -254,8 +263,9 @@ function PureMultimodalInput({
         }}
       />
 
-      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
+      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start gap-1">
         <AttachmentsButton fileInputRef={fileInputRef} isLoading={isLoading} />
+        <SpeechRecognitionButton onTranscript={handleSpeechTranscript} isDisabled={isLoading} />
       </div>
 
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">

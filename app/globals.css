@@ -176,3 +176,69 @@
 .suggestion-highlight {
     @apply bg-blue-200 hover:bg-blue-300 dark:hover:bg-blue-400/50 dark:text-blue-50 dark:bg-blue-500/40;
 }
+
+/* Auth page animations */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes gradient-x {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-twinkle {
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.animate-gradient-x {
+    animation: gradient-x 6s ease infinite;
+    background-size: 400% 400%;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+}
+
+/* OYUNA branding styles */
+.oyuna-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient-x;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Auth form enhancements */
+.auth-input {
+    @apply bg-white/5 border border-white/10 rounded-lg px-4 py-2 transition-all;
+}
+.auth-input:focus {
+    @apply border-indigo-500/50 ring-1 ring-indigo-500/30;
+}
+
+/* Custom glow effects */
+.glow-effect {
+    position: relative;
+}
+.glow-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 2em 0.5em theme('colors.indigo.500 / 15%');
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+}
+.glow-effect:hover::after {
+    opacity: 1;
+}

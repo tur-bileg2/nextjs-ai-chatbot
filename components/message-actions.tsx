@@ -13,8 +13,28 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/tooltip';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import equal from 'fast-deep-equal';
+
+// Add a new speaker icon for TTS
+const SpeakerIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+  </svg>
+);
 
 export function PureMessageActions({
   chatId,
@@ -29,6 +49,33 @@ export function PureMessageActions({
 }) {
   const { mutate } = useSWRConfig();
   const [_, copyToClipboard] = useCopyToClipboard();
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // Handle text-to-speech
+  const speakText = (text: string) => {
+    // Stop any ongoing speech
+    window.speechSynthesis.cancel();
+    
+    if (isSpeaking) {
+      setIsSpeaking(false);
+      return;
+    }
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Set language to Mongolian
+    utterance.lang = 'mn-MN';
+    
+    // Event handlers
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      toast.error('Speech synthesis failed');
+    };
+    
+    window.speechSynthesis.speak(utterance);
+  };
 
   if (isLoading) return null;
   if (message.role === 'user') return null;
@@ -53,6 +100,23 @@ export function PureMessageActions({
           </TooltipTrigger>
           <TooltipContent>Copy</TooltipContent>
         </Tooltip>
+
+        {/* Add TTS Button */}
+        {/* Add TTS Button */}
+        {/* 
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              className={`py-1 px-2 h-fit text-muted-foreground ${isSpeaking ? "bg-primary/20" : ""}`}
+              variant="outline"
+              onClick={() => speakText(message.content as string)}
+            >
+              <SpeakerIcon className={isSpeaking ? "animate-pulse" : ""} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{isSpeaking ? "Stop Speaking" : "Listen"}</TooltipContent>
+        </Tooltip>
+        */}
 
         <Tooltip>
           <TooltipTrigger asChild>
